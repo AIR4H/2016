@@ -1,9 +1,15 @@
 package org.usfirst.frc.team78.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
+import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team78.robot.commands.ExampleCommand;
+import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
+import org.usfirst.frc.team78.robot.commands.RicksDemands;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,12 +17,35 @@ import org.usfirst.frc.team78.robot.commands.ExampleCommand;
  */
 public class OI {
 	
+	//JOYSTICKS
 	public Joystick driverStick;
 	
+	
+	//BUTTONS
+	public Button btnHoldHeading;
+	public Button btnFiveFeet;
+	
+	
+	//CONSTANTS
 	final static double STICK_DEADZONE = 0.05;
+	
+	
+	
+	
 	
 	public OI(){
 		driverStick = new Joystick(0);
+		
+		btnHoldHeading = new JoystickButton(driverStick, 2);
+		btnHoldHeading.whileHeld(new HeadingCorrection());
+		
+		btnFiveFeet = new JoystickButton(driverStick, 1);
+		btnFiveFeet.whenPressed(new RicksDemands());
+		btnFiveFeet.whenReleased(new DriveWithJoysticks());
+		
+		/*btnFiveFeet = new JoystickButton(driverStick, 4);
+		btnFiveFeet.whenPressed(new DriveStraightDistance(5));
+		btnFiveFeet.whenReleased(new DriveWithJoysticks());*/
 	}
 	
 	///DRIVER STICK
@@ -26,7 +55,7 @@ public class OI {
 			return 0;
 		}
 		else
-			return stick;
+			return -stick;
 	}
 	
 	public double getDriverRightStick() {
@@ -35,7 +64,7 @@ public class OI {
 			return 0;
 		}
 		else
-			return stick;
+			return -stick;
 	}
 	
     //// CREATING BUTTONS

@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team78.robot.commands.ExampleCommand;
 import org.usfirst.frc.team78.robot.subsystems.Chassis;
 import org.usfirst.frc.team78.robot.subsystems.ExampleSubsystem;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -98,6 +100,11 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	SmartDashboard.putNumber("Gyro", Robot.chassis.getGyro()); 
+    	SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
+    	SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
+    	SmartDashboard.putNumber("Right Stick", Robot.oi.getDriverRightStick());
+    	SmartDashboard.putNumber("Left Stick", Robot.oi.getDriverLeftStick());
         Scheduler.getInstance().run();
     }
     
