@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class PortCoooolis extends CommandGroup {
+public class AntiIntakeGroup extends CommandGroup {
     
-    public  PortCoooolis() {
+    public  AntiIntakeGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,8 +24,7 @@ public class PortCoooolis extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
-    	addSequential(new SetIntakeSpeed(1));
-    	
+    	addParallel(new StopIntake());
+    	addSequential(new StopShooter());
     }
 }

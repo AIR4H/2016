@@ -31,7 +31,7 @@ public class Intake extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	//setDefaultCommand(new Intake());
-    	setDefaultCommand(new SetIntakeSpeed(0)); // TODO tim added may need to take out
+    	setDefaultCommand(new DefaultIntake()); // TODO tim added may need to take out
     }
     
     public void setIntakeSpeed(double speed){

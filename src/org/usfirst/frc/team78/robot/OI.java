@@ -8,12 +8,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team78.robot.commands.AlternateIntake;
 import org.usfirst.frc.team78.robot.commands.AntiIntake;
+import org.usfirst.frc.team78.robot.commands.AntiIntakeGroup;
 import org.usfirst.frc.team78.robot.commands.DefaultIntake;
 import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team78.robot.commands.DriveTime;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
 import org.usfirst.frc.team78.robot.commands.Intake;
+import org.usfirst.frc.team78.robot.commands.IntakeGroup;
 import org.usfirst.frc.team78.robot.commands.MoveIntake;
 import org.usfirst.frc.team78.robot.commands.MovePancake;
 import org.usfirst.frc.team78.robot.commands.VisionTurnAuto;
@@ -28,6 +30,7 @@ import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team78.robot.commands.StUCK;
+import org.usfirst.frc.team78.robot.commands.StopShooter;
 import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
@@ -174,16 +177,16 @@ public class OI {
 		manPnIntake.whenReleased(new MoveIntake("up"));
 		
 		manIntake = new JoystickButton(manipulatorStick, 3);
-		manIntake.whileHeld(new Intake());
-		manIntake.whenReleased(new AntiIntake());
+		manIntake.whileHeld(new IntakeGroup());
+		manIntake.whenReleased(new AntiIntakeGroup());
 		
 		manPnShooter = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_PN);
 		manPnShooter.whenPressed(new MoveShooter("up"));
 		manPnShooter.whenReleased(new MoveShooter("down"));
 		
 		manShooterHigh = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_HIGH_BTN); 
-		manShooterHigh.whenPressed(new SetShooterSpeed(1));
-		manShooterHigh.whenReleased(new SetShooterSpeed(0));
+		manShooterHigh.whenPressed(new SetShooterSpeed(1)); // This may need to be changed to while held
+		manShooterHigh.whenReleased(new StopShooter());
 		
 		manPnPancake = new JoystickButton(manipulatorStick, RobotMap.PANCAKE_PN);
 		manPnPancake.whenPressed(new MovePancake("out"));
@@ -191,7 +194,7 @@ public class OI {
 				
 		manShooterMid = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_MID_BTN);
 		manShooterMid.whenPressed(new SetShooterSpeed(.9));
-		manShooterMid.whenReleased(new SetShooterSpeed(0));
+		manShooterMid.whenReleased(new StopShooter());
 				
 		
 		/*btn5M = new JoystickButton(manipulatorStick, 5);

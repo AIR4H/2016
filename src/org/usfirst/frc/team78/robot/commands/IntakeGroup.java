@@ -1,13 +1,15 @@
 package org.usfirst.frc.team78.robot.commands;
 
+import org.usfirst.frc.team78.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class PortCoooolis extends CommandGroup {
+public class IntakeGroup extends CommandGroup {
     
-    public  PortCoooolis() {
+    public  IntakeGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,8 +26,7 @@ public class PortCoooolis extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
-    	addSequential(new SetIntakeSpeed(1));
-    	
+    	addParallel(new SetIntakeSpeed(-0.5));
+    	addSequential(new SetShooterSpeed(-0.35));
     }
 }
