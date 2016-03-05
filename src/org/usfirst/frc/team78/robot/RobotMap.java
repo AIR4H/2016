@@ -55,8 +55,8 @@ public class RobotMap {
 	final static public int SHOOTER_HIGH_BTN = 4;
 	
 	// FACTORS
-	final static public double INTAKE_SPEED = 0.5;
-	final static public double SHOOTER_INTAKE_SPEED = 0.35;
+	final static public double INTAKE_SPEED = 0.75;
+	final static public double SHOOTER_INTAKE_SPEED = 0.47;
 	
 	// CONSTANTS
 	final static public double SHOOTER_LOW = 0.5;

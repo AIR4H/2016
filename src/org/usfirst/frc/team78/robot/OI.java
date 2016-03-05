@@ -116,9 +116,9 @@ public class OI {
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
-		btn5 = new JoystickButton(driverStick, 5);
-		btn5.whenPressed(new VisionTurnDriver());
-		btn5.whenReleased(new RumbleTest(0));
+		//btn5 = new JoystickButton(driverStick, 5);
+		//btn5.whenPressed(new VisionTurnDriver());
+		//btn5.whenReleased(new RumbleTest(0));
 		
 		
 //__________________________________________________________________________________________________________________________________
@@ -177,7 +177,7 @@ public class OI {
 		manPnIntake.whenReleased(new MoveIntake("up"));
 		
 		manIntake = new JoystickButton(manipulatorStick, 3);
-		manIntake.whileHeld(new IntakeGroup());
+		manIntake.whenPressed(new IntakeGroup());
 		manIntake.whenReleased(new AntiIntakeGroup());
 		
 		manPnShooter = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_PN);
@@ -185,7 +185,7 @@ public class OI {
 		manPnShooter.whenReleased(new MoveShooter("down"));
 		
 		manShooterHigh = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_HIGH_BTN); 
-		manShooterHigh.whenPressed(new SetShooterSpeed(1)); // This may need to be changed to while held
+		manShooterHigh.whileHeld(new SetShooterSpeed(1)); // This may need to be changed to while held
 		manShooterHigh.whenReleased(new StopShooter());
 		
 		manPnPancake = new JoystickButton(manipulatorStick, RobotMap.PANCAKE_PN);
@@ -246,9 +246,12 @@ public class OI {
 	}
 	
 	public double getManipulatorStick() {
-		double stick = manipulatorStick.getRawAxis(2);
-		if (Math.abs(stick) < STICK_DEADZONE) return 0;
-		else return -stick;
+		double stick = manipulatorStick.getRawAxis(1);
+		if (Math.abs(stick) < STICK_DEADZONE){
+			return 0;
+		}
+		else
+			return -stick;
 	}
 	
 	public boolean isStickPushed(){

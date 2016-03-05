@@ -14,7 +14,7 @@ public class MovePancake extends Command {
     public MovePancake(String direction) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
+    	//requires(Robot.shooter);
     	m_direction = direction;
     }
 
@@ -36,7 +36,7 @@ public class MovePancake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
