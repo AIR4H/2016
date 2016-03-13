@@ -144,6 +144,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	
+    	
     	//SENSOR DATA
     	SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
     	SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
@@ -172,7 +173,11 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putBoolean("timer", Robot.chassis.timerStart);
     	SmartDashboard.putNumber("Vision Gyro", Robot.chassis.testAngle);
     	SmartDashboard.putBoolean("Is at Vision Turn", Robot.chassis.isAtVisionHeading());
-
+    	
+    	SmartDashboard.putNumber("Displacement X", Robot.chassis.getDisplacementX()*3.28);
+    	SmartDashboard.putNumber("Displacement Y", Robot.chassis.getDisplacementY()*3.28);
+    	SmartDashboard.putNumber("Displacement Z", Robot.chassis.getDisplacementZ()*3.28);
+    	
     
         	
         Scheduler.getInstance().run();

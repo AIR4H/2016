@@ -116,8 +116,8 @@ public class OI {
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
-		//btn5 = new JoystickButton(driverStick, 5);
-		//btn5.whenPressed(new VisionTurnDriver());
+		btn5 = new JoystickButton(driverStick, 5);
+		btn5.whenPressed(new VisionTurnDriver());
 		//btn5.whenReleased(new RumbleTest(0));
 		
 		
@@ -261,6 +261,7 @@ public class OI {
 		}
 		else{
 			state = false;
+			
 		}
 		return state;
 	}

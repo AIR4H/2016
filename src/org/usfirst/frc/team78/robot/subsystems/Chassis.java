@@ -72,6 +72,7 @@ public class Chassis extends Subsystem {
 	public Timer timer = new Timer();
 	
 	
+	
 	//TEST SHIT
 	public boolean didTurnStart = false;
 	public double testAngle;
@@ -412,6 +413,8 @@ public class Chassis extends Subsystem {
     	leftEnc.reset();
     	rightEnc.reset();
     	ahrs.reset();
+    	ahrs.resetDisplacement();
+  
     	Timer.delay(.25);
     }
     
@@ -445,6 +448,18 @@ public class Chassis extends Subsystem {
     	return ahrs.getRoll();//just look at all the different gets, figure out what is going on
     }
     
+    public float getDisplacementX(){
+    	return ahrs.getDisplacementX();//just look at all the different gets, figure out what is going on
+    }
+    
+    public float getDisplacementY(){
+    	return ahrs.getDisplacementY();//just look at all the different gets, figure out what is going on
+    }
+    
+    public float getDisplacementZ(){
+    	return ahrs.getDisplacementZ();//just look at all the different gets, figure out what is going on
+    }
+    
     public boolean robotLevel(){
     	if(Math.abs(getRoll()) > 2){
     		return false;
@@ -453,5 +468,21 @@ public class Chassis extends Subsystem {
     	}
     		
     }
-
+    
+    public boolean RollOverDefense(double start){
+    	boolean startGoOver = false;
+    	boolean finalBool = false;
+    	if(Math.abs(start-getRoll()) > 0.3){
+    		startGoOver = true; 
+    	}
+    	if((Math.abs(start-getRoll()) < 0.3) && startGoOver){
+    		timer.reset();
+    		timer.start();
+    		if(timer.get() > 0.5){
+    			finalBool = true;
+    		}
+    	}
+    	return finalBool;
+    }
+    
 }

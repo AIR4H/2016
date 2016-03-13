@@ -25,8 +25,8 @@ public class VisionTurnDriver extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = Robot.chassis.visionTurn();
-    	Robot.chassis.setTurnSpeed(speed);
+    	//speed = Robot.chassis.visionTurn();
+    	//Robot.chassis.setTurnSpeed(speed);
     	
     }
 
