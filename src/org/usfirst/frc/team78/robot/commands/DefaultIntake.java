@@ -5,10 +5,13 @@ import org.usfirst.frc.team78.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+
 /**
  *
  */
 public class DefaultIntake extends Command {
+	
+	double i_speed;
 
     public DefaultIntake() {
         // Use requires() here to declare subsystem dependencies
@@ -22,7 +25,13 @@ public class DefaultIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.setIntakeSpeed(Robot.oi.getManipulatorStick() * RobotMap.INTAKE_SPEED);
+    	
+    	if (Math.abs(Robot.oi.getManipulatorStick()) < .15 ){
+    		Robot.intake.setIntakeSpeed(0);
+    	}
+    	else Robot.intake.setIntakeSpeed(Robot.oi.getManipulatorStick() * RobotMap.INTAKE_SPEED);
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

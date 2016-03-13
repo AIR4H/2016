@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DefaultShooter extends Command {
+	
+	double s_speed;
 
     public DefaultShooter() {
         // Use requires() here to declare subsystem dependencies
@@ -24,7 +26,11 @@ public class DefaultShooter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.oi.isTriggerPushed()) Robot.shooter.setShooterSpeed(RobotMap.SHOOTER_LOW);
+    	else if ((Robot.oi.getManipulatorStick() < .15) && (Robot.oi.getManipulatorStick() > -.15)) {
+    		Robot.shooter.setShooterSpeed(0);
+    	}
     	else Robot.shooter.setShooterSpeed(Robot.oi.getManipulatorStick() * RobotMap.SHOOTER_INTAKE_SPEED);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
     	
         CameraServer server;
         server = CameraServer.getInstance();
-    	server.setQuality(50);
+    	server.setQuality(40);
     	server.startAutomaticCapture("cam0");
 
     	table = NetworkTable.getTable("magicland");
@@ -153,6 +153,8 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Get Angle", Robot.chassis.getAngle());
     	SmartDashboard.putNumber("Get Pitch", Robot.chassis.getPitch());
     	SmartDashboard.putNumber("Get Roll", Robot.chassis.getRoll());
+    	
+    	SmartDashboard.putBoolean("Robot Level", Robot.chassis.robotLevel());
     	
     	//VISION
     	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());

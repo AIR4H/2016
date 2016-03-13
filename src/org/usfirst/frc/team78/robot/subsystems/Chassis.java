@@ -96,10 +96,10 @@ public class Chassis extends Subsystem {
     	double left = Robot.oi.getDriverLeftStick();
     	double right = Robot.oi.getDriverRightStick();
     	
-    	if (Robot.oi.driverStick.getRawButton(8)){
+    	if (Robot.oi.driverStick.getRawButton(7)){
     		setSpeed(left*0.5, right*0.5);
     	}
-    	else if (Robot.oi.driverStick.getRawButton(7)){
+    	else if (Robot.oi.driverStick.getRawButton(8)){
     		setSpeed(left, right);
     	}
     	else{
@@ -445,5 +445,13 @@ public class Chassis extends Subsystem {
     	return ahrs.getRoll();//just look at all the different gets, figure out what is going on
     }
     
+    public boolean robotLevel(){
+    	if(Math.abs(getRoll()) > 2){
+    		return false;
+    	}else{
+    		return true;
+    	}
+    		
+    }
 
 }

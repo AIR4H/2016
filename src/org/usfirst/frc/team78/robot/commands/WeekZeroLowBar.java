@@ -28,8 +28,8 @@ public class WeekZeroLowBar extends CommandGroup {
     	addSequential(new DoNothing(1));
     	//addSequential(new ResetSensors());
     	//addSequential(new DoNothing(1));
-    	addSequential(new DriveStraightDistance(-15));
-    	addSequential(new Turn(180));
+    	addSequential(new DriveTime(-0.8, 2));
+    	//addSequential(new Turn(180));
     	
     }
 }
