@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+
 import org.usfirst.frc.team78.robot.commands.AutoSpyBox;
 import org.usfirst.frc.team78.robot.commands.AutoTerrainShootLeft;
 import org.usfirst.frc.team78.robot.commands.DoNothing;
@@ -160,6 +161,7 @@ public class Robot extends IterativeRobot {
     	//VISION
     	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
     	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
+    	
     	
     	//PROGRAM TESTS
     	SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);

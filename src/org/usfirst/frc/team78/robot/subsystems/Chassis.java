@@ -59,11 +59,13 @@ public class Chassis extends Subsystem {
 	
 	
 	//CONSTANTS
-	final double GYRO_P = (.017);//.003; test bot
+	//final double GYRO_P = (.003);	//test bot
+	//final double GYRO_P = (.017);	//Pre 15March value
+	final double GYRO_P = (.025);//.003; test bot
 	final double DISTANCE_P = 0.00035;
-	final double VISIONX_GOAL = 0;
+	final double VISIONX_GOAL = -215;
 	final double VISIONY_GOAL = 200;
-	final double VISIONX_P = .0028;
+	final double VISIONX_P = .002;
 	final double VISIONY_P = 0;
 	final double PIXELS_TO_ANGLE = .1;
 
@@ -242,11 +244,11 @@ public class Chassis extends Subsystem {
     		speed = -.7;
     	}
     	
-    	if (speed < .13 && speed > 0){//TODO NEED TO BE TUNED FOR REAL ROBOT
-    		speed = .13;
+    	if (speed < .3 && speed > 0){//TODO NEED TO BE TUNED FOR REAL ROBOT
+    		speed = .3;
     	}
-    	if(speed > -.13 && speed < 0){ 
-    		speed = -.13;
+    	if(speed > -.3 && speed < 0){ 
+    		speed = -.3;
     	}
     	
     	
@@ -375,7 +377,7 @@ public class Chassis extends Subsystem {
     		noGoal = true;
     	}
     	
-    	if ((current < (VISIONX_GOAL + 15)) && (current > (VISIONX_GOAL - 15))){
+    	if ((current < (VISIONX_GOAL + 17)) && (current > (VISIONX_GOAL - 17))){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();

@@ -117,7 +117,7 @@ public class OI {
 		btn6.whileHeld(new PortCoooolis());
 		
 		btn5 = new JoystickButton(driverStick, 5);
-		btn5.whenPressed(new VisionTurnDriver());
+		btn5.whileHeld(new VisionTurnDriver());
 		//btn5.whenReleased(new RumbleTest(0));
 		
 		
@@ -193,7 +193,7 @@ public class OI {
 		manPnPancake.whenReleased(new MovePancake("in"));
 				
 		manShooterMid = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_MID_BTN);
-		manShooterMid.whenPressed(new SetShooterSpeed(.9));
+		manShooterMid.whenPressed(new SetShooterSpeed(.67));
 		manShooterMid.whenReleased(new StopShooter());
 				
 		

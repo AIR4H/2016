@@ -25,8 +25,8 @@ public class VisionTurnDriver extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//speed = Robot.chassis.visionTurn();
-    	//Robot.chassis.setTurnSpeed(speed);
+    	speed = Robot.chassis.visionTurn();
+    	Robot.chassis.setTurnSpeed(speed);
     	
     }
 
@@ -38,13 +38,14 @@ public class VisionTurnDriver extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	
     	Robot.chassis.stopAllDrive();
     	Robot.chassis.timerStart = false;
     	Robot.chassis.atTarget = false;
     	Robot.chassis.timer.stop();
     	Robot.chassis.timer.reset();
-    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
-    	OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
+    	//OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
+    	//OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
     }
 
     // Called when another command which requires one or more of the same
