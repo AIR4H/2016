@@ -63,7 +63,7 @@ public class Chassis extends Subsystem {
 	//final double GYRO_P = (.017);	//Pre 15March value
 	final double GYRO_P = (.025);//.003; test bot
 	final double DISTANCE_P = 0.00035;
-	final double VISIONX_GOAL = -215;
+	final double VISIONX_GOAL = -195;
 	final double VISIONY_GOAL = 200;
 	final double VISIONX_P = .002;
 	final double VISIONY_P = 0;
