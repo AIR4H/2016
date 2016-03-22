@@ -15,6 +15,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SPI;
@@ -49,6 +50,7 @@ public class Chassis extends Subsystem {
 		//Window->Preferences->Java->Build Path->Classpath Variables->New
 		//make a new variable called navx-mxp from <HomeDirectory>\navx-mxp\java\lib\navx_frc.jar
 		//right click Referenced Libraries, add the new variable
+	
 
 	
 	//VARIABLES
@@ -56,6 +58,8 @@ public class Chassis extends Subsystem {
 	public boolean atTarget = false;
 	public boolean noGoal;
 	Boolean onObstacle = false;
+	public boolean onDefense = false;
+	public boolean overDefense = false;
 	
 	
 	//CONSTANTS
@@ -68,6 +72,8 @@ public class Chassis extends Subsystem {
 	final double VISIONX_P = .002;
 	final double VISIONY_P = 0;
 	final double PIXELS_TO_ANGLE = .1;
+	final double DEFENSE_GYRO = 4; //TUNE
+	final double PLATFORM_GYRO = 4; //TUNE
 
 	
 	//TIMER
@@ -402,6 +408,58 @@ public class Chassis extends Subsystem {
     	
     }// end isAtTurnTarget
 
+    
+    
+    public Boolean isOverDefense(){ //IN COMMAND, NEED TO RESET ON AND OVER DEFENSE	TIMER
+    	
+    	boolean over = false;
+    	double current = getRoll();
+    	
+    	if(current >= DEFENSE_GYRO){
+    		onDefense = true;
+    	}
+    	
+    	if(current < 3 && current > -3 && onDefense){
+    		overDefense = true;
+    	}
+    	else{
+    		overDefense = false;
+    	}
+    	
+    	if (overDefense){
+    		if(timerStart == false){
+   				timerStart = true;
+   				timer.start();
+   			}
+    		
+   		}
+   	
+   		else{
+   		
+   			if(timerStart == true){
+    			timer.stop();
+    			timer.reset();
+    			timerStart = false;
+   			}
+   		}
+    	
+   		if(timer.get() >.3){
+   			over = true;
+    	}
+    	
+    	return over;
+    }
+    
+    public Boolean isOnRamp(){
+    	boolean ramp = false;
+    	double current = getRoll();
+    	
+    	if(current >= PLATFORM_GYRO){
+    		ramp = true;
+    	}
+    	
+    	return ramp;
+    }
     
  //______________________________________________________________________________ 
  //SENSOR METHODS  

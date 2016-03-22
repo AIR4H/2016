@@ -23,9 +23,9 @@ import org.usfirst.frc.team78.robot.commands.PortCoooolis;
 import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.AlternateShooter;
 import org.usfirst.frc.team78.robot.commands.MoveShooter;
-import org.usfirst.frc.team78.robot.commands.ReadyShoot;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
 import org.usfirst.frc.team78.robot.commands.RumbleTest;
+import org.usfirst.frc.team78.robot.commands.SetBrake;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
@@ -116,9 +116,15 @@ public class OI {
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
-		btn5 = new JoystickButton(driverStick, 5);
-		btn5.whileHeld(new VisionTurnDriver());
+		btn4 = new JoystickButton(driverStick, 4);
+		btn4.whileHeld(new VisionTurnDriver());
 		//btn5.whenReleased(new RumbleTest(0));
+		
+		btn5 = new JoystickButton(driverStick, 5);
+		btn5.whenPressed(new SetBrake("down"));
+		btn5.whenReleased(new SetBrake("up"));
+		
+		
 		
 		
 //__________________________________________________________________________________________________________________________________
@@ -193,7 +199,7 @@ public class OI {
 		manPnPancake.whenReleased(new MovePancake("in"));
 				
 		manShooterMid = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_MID_BTN);
-		manShooterMid.whenPressed(new SetShooterSpeed(.67));
+		manShooterMid.whileHeld(new SetShooterSpeed(.67));
 		manShooterMid.whenReleased(new StopShooter());
 				
 		

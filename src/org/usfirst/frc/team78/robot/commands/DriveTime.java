@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveTime extends Command {
 	
+	double leftSpeed;
+	double rightSpeed;
 	double m_speed;
+	double startHeading;
 	
     public DriveTime(double speed, double time) {
         // Use requires() here to declare subsystem dependencies
@@ -21,11 +24,22 @@ public class DriveTime extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.setSpeed(m_speed, m_speed);
+    	startHeading = Robot.chassis.getAngle();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	leftSpeed = m_speed;
+    	rightSpeed = m_speed;
+    	
+    	leftSpeed = leftSpeed + Robot.chassis.headingCorrection(startHeading);
+    	rightSpeed = rightSpeed - Robot.chassis.headingCorrection(startHeading);
+    	
+    	
+    	Robot.chassis.setSpeed(leftSpeed, rightSpeed);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

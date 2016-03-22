@@ -29,12 +29,14 @@ public class AutoSpyBox extends CommandGroup {
     	addSequential(new MoveIntake("down"));
     	addSequential(new DoNothing(.75));
     	addSequential(new MoveShooter("up"));
-    	//addSequential(new SetShooterSpeed(1));
+    	addSequential(new DoNothing(.75));
+    	addSequential(new SetShooterSpeed(1));
     	addSequential(new DoNothing(2));
     	addSequential(new PunchPancake());
-    	addSequential(new DoNothing(.75));
-    	//addSequential(new SetShooterSpeed(0));
+    	addSequential(new DoNothing(1));
+    	addSequential(new SetShooterSpeed(0));
     	addSequential(new MoveShooter("down"));
+    	addSequential(new DoNothing(1));
     	addSequential(new MoveIntake("up"));
     	
     	
@@ -43,7 +45,7 @@ public class AutoSpyBox extends CommandGroup {
     	//addSequential(new Turn(90));
     	
     	//Drive + turn
-    	addSequential(new LeftDriveTime(0.75, 2));
+    	//addSequential(new LeftDriveTime(0.75, 2));
     	
     	
     }

@@ -31,6 +31,8 @@ public class RobotMap {
 	final static public int SHOOTER_PAN_REVERSE = 5;
 	final static public int INTAKE_FOREWARD = 2;
 	final static public int INTAKE_REVERSE = 3;
+	final static public int BRAKE_FOREWARD = 6;
+	final static public int BRAKE_REVERSE = 7;
 	
 	
 	//ANALOG SENSORS

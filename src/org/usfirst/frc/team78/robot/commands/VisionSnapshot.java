@@ -27,6 +27,7 @@ public class VisionSnapshot extends Command {
     protected void execute() {
     	speed = Robot.chassis.turnAngleAdditional(angleCorrection);
     	Robot.chassis.setTurnSpeed(speed);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -25,7 +25,7 @@ public class StupidSimpleAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new DriveTime(-1, 2));
+    	addSequential(new DriveTime(-.8, 2));
     	addSequential(new DriveTime(0, 2));
     }
 }
