@@ -29,7 +29,7 @@ public class TurnAdditional extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = Robot.chassis.turnAngleAdditional((startAngle + m_angle)%360);
+    	speed = Robot.chassis.turnAngleAdditional((startAngle + m_angle));
     	
     	Robot.chassis.setTurnSpeed(speed);
     }

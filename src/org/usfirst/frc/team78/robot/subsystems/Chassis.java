@@ -67,9 +67,9 @@ public class Chassis extends Subsystem {
 	//final double GYRO_P = (.017);	//Pre 15March value
 	final double GYRO_P = (.025);//.003; test bot
 	final double DISTANCE_P = 0.00035;
-	final double VISIONX_GOAL = 100;//TUNE
+	final double VISIONX_GOAL = 22;//TUNE
 	final double VISIONY_GOAL = 200;
-	final double PIXELS_TO_ANGLE = .1042;
+	final double PIXELS_TO_ANGLE = 9.5969;
 	final double DEFENSE_GYRO = 4;
 	final double PLATFORM_GYRO = 4;
 	public final double MAX_TURN_SPEED = .4;
@@ -204,11 +204,11 @@ public class Chassis extends Subsystem {
     }
 
     public double getGyroVisionTarget(){
-    	double pixelError = VISIONX_GOAL - Robot.vision.getVisionX();
-    	double gyroAngle = pixelError * PIXELS_TO_ANGLE;
-    	//testAngle = pixels*PIXELS_TO_ANGLE;
-    	//double angle = testAngle;
-    	return -gyroAngle;//when positive, need to turn right. same as set turn speed
+    	double pixelError = (VISIONX_GOAL) - Robot.vision.getVisionX();
+    	double gyroAngle = (pixelError/PIXELS_TO_ANGLE)*(-1);
+    	//gyroAngle = gyroAngle*(-1);
+    	testAngle = gyroAngle;
+    	return gyroAngle;//when positive, need to turn right. same as set turn speed
     }
     
     

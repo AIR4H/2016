@@ -170,6 +170,7 @@ public class Robot extends IterativeRobot {
     	
     	
     	//PROGRAM TESTS
+    	SmartDashboard.putNumber("Vision Angle", Robot.chassis.testAngle);
     	//SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
     	//SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
     	//SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);

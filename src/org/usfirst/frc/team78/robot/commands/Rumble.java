@@ -8,20 +8,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RumbleTest extends Command {
+public class Rumble extends Command {
 
-	float m_i;
-	
-    public RumbleTest(float i) {
+    public Rumble() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	m_i = i;
+    	setTimeout(1);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	OI.tStick.setRumble(RumbleType.kLeftRumble, m_i);
-    	OI.tStick.setRumble(RumbleType.kRightRumble, m_i);
+    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
+		OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,11 +28,13 @@ public class RumbleTest extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
+		OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
     }
 
     // Called when another command which requires one or more of the same

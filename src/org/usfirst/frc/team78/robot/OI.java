@@ -24,16 +24,15 @@ import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.AlternateShooter;
 import org.usfirst.frc.team78.robot.commands.MoveShooter;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
-import org.usfirst.frc.team78.robot.commands.RumbleTest;
 import org.usfirst.frc.team78.robot.commands.SetBrake;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
-import org.usfirst.frc.team78.robot.commands.StUCK;
 import org.usfirst.frc.team78.robot.commands.StopShooter;
 import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
+import org.usfirst.frc.team78.robot.commands.VisionRumble;
 import org.usfirst.frc.team78.robot.commands.VisionSnapshot;
 
 
@@ -191,7 +190,7 @@ public class OI {
 		manPnShooter.whenReleased(new MoveShooter("down"));
 		
 		manShooterHigh = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_HIGH_BTN); 
-		manShooterHigh.whileHeld(new SetShooterSpeed(1)); // This may need to be changed to while held
+		manShooterHigh.whileHeld(new SetShooterSpeed(1));
 		manShooterHigh.whenReleased(new StopShooter());
 		
 		manPnPancake = new JoystickButton(manipulatorStick, RobotMap.PANCAKE_PN);
@@ -228,11 +227,11 @@ public class OI {
 		btn2T.whenPressed(new Turn(90));
 		
 		btn3T = new JoystickButton(tStick, 3);
-		btn3T.whenPressed(new TurnAdditional(5));
+		btn3T.whenPressed(new TurnAdditional(-5));
 		
 		btn4T = new JoystickButton(tStick, 4);
-		btn4T.whenPressed(new VisionSnapshot());
-		
+		btn4T.whenPressed(new VisionRumble());
+		//Robot.chassis.getGyroVisionTarget())
 		
 	}
 	
@@ -281,6 +280,7 @@ public class OI {
 		if(Math.abs(manipulatorStick.getRawAxis(3)) > STICK_DEADZONE) return true;
 		else return false;
 	}
+	
 	
 }
 
