@@ -13,12 +13,12 @@ import org.usfirst.frc.team78.robot.commands.DefaultIntake;
 import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team78.robot.commands.DriveTime;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team78.robot.commands.FastVision;
 import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
 import org.usfirst.frc.team78.robot.commands.Intake;
 import org.usfirst.frc.team78.robot.commands.IntakeGroup;
 import org.usfirst.frc.team78.robot.commands.MoveIntake;
 import org.usfirst.frc.team78.robot.commands.MovePancake;
-import org.usfirst.frc.team78.robot.commands.VisionTurnAuto;
 import org.usfirst.frc.team78.robot.commands.PortCoooolis;
 import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.AlternateShooter;
@@ -35,7 +35,7 @@ import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 import org.usfirst.frc.team78.robot.commands.VisionSnapshot;
-import org.usfirst.frc.team78.robot.commands.VisionTurnDriver;
+
 
 
 
@@ -116,8 +116,8 @@ public class OI {
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
-		btn4 = new JoystickButton(driverStick, 4);
-		btn4.whileHeld(new VisionTurnDriver());
+		//btn4 = new JoystickButton(driverStick, 4);
+		//btn4.whileHeld(new VisionTurnDriver());
 		//btn5.whenReleased(new RumbleTest(0));
 		
 		btn5 = new JoystickButton(driverStick, 5);
@@ -220,14 +220,18 @@ public class OI {
 		
 //__________________________________________________________________________________________________________________________________________
 	
-		/*btn1T = new JoystickButton(tStick, 1);
-		btn1T.whenPressed(new AlternateIntake());*/
+		btn1T = new JoystickButton(tStick, 1);
+		btn1T.whileHeld(new HeadingCorrection());
+	
 		
 		btn2T = new JoystickButton(tStick, 2);
-		btn2T.whenPressed(new VisionTurnAuto());
+		btn2T.whenPressed(new Turn(90));
 		
+		btn3T = new JoystickButton(tStick, 3);
+		btn3T.whenPressed(new TurnAdditional(5));
 		
-		
+		btn4T = new JoystickButton(tStick, 4);
+		btn4T.whenPressed(new VisionSnapshot());
 		
 		
 	}

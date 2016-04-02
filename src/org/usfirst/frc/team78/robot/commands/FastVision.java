@@ -7,11 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class VisionTurnAuto extends Command {
+public class FastVision extends Command {
 
-	double speed;
-	
-    public VisionTurnAuto() {
+    public FastVision() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -19,19 +17,17 @@ public class VisionTurnAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = Robot.chassis.visionTurn();
-    	Robot.chassis.setTurnSpeed(speed);
-    	
+    	Robot.chassis.setTurnSpeed((Robot.chassis.MIN_TURN_SPEED) * Robot.chassis.fastVision());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return Robot.chassis.isAtVisionHeading();
-        
     }
 
     // Called once after isFinished returns true

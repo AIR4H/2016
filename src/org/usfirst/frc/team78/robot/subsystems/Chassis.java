@@ -67,13 +67,14 @@ public class Chassis extends Subsystem {
 	//final double GYRO_P = (.017);	//Pre 15March value
 	final double GYRO_P = (.025);//.003; test bot
 	final double DISTANCE_P = 0.00035;
-	final double VISIONX_GOAL = -195;
+	final double VISIONX_GOAL = 100;//TUNE
 	final double VISIONY_GOAL = 200;
-	final double VISIONX_P = .002;
-	final double VISIONY_P = 0;
-	final double PIXELS_TO_ANGLE = .1;
-	final double DEFENSE_GYRO = 4; //TUNE
-	final double PLATFORM_GYRO = 4; //TUNE
+	final double PIXELS_TO_ANGLE = .1042;
+	final double DEFENSE_GYRO = 4;
+	final double PLATFORM_GYRO = 4;
+	public final double MAX_TURN_SPEED = .4;
+	public final double MIN_TURN_SPEED =.15;
+
 
 	
 	//TIMER
@@ -81,12 +82,9 @@ public class Chassis extends Subsystem {
 	
 	
 	
-	//TEST SHIT
+	//TEST VARIABLES
 	public boolean didTurnStart = false;
 	public double testAngle;
-
-	
-	
 	
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -140,13 +138,7 @@ public class Chassis extends Subsystem {
     	double distanceError = (distance - ((getRightEnc()))); //+ getLeftEnc()) / 2));
     	double speed = distanceError*DISTANCE_P;
     	
-    	/*if (distanceError > 3000){
-    		speed = .8;
-    	}
     	
-    	else if (speed > .8){
-    		speed = .8;
-    	} */
     	if (speed < .25 && speed > 0){
     		speed = .25;
     	}
@@ -154,11 +146,7 @@ public class Chassis extends Subsystem {
     		speed = -.25;
     	}
     	
-    	//double driftError = getAngle();
-    	//setSpeed(speed-((GYRO_P)*driftError), speed+((GYRO_P)*driftError));
-    	
     	return speed;
-    	
     	
     }//end driveStraightDistance
     
@@ -175,7 +163,6 @@ public class Chassis extends Subsystem {
     	
     	
     	return ((GYRO_P)*driftError);
-    	//setSpeed(((GYRO_P)*driftError), -((GYRO_P)*driftError));
     	
     }//end headingCorrection
     
@@ -183,91 +170,45 @@ public class Chassis extends Subsystem {
     public double turnAngleAdditional(double target){
     	double speed;
 
-    	speed = headingCorrection(target);
+    	speed = headingCorrection(target)*(.22222222);//So that turns aren't as aggressive as heading correction. Makes constant effectively .005555
     	
-    	if (speed > .7){
-    		speed = .7;
+    	if (speed > MAX_TURN_SPEED){
+    		speed = MAX_TURN_SPEED;
     	}
-    	if(speed < -.7){ 
-    		speed = -.7;
+    	if(speed < -MAX_TURN_SPEED){ 
+    		speed = -MAX_TURN_SPEED;
     	}
     	
-    	if (speed < .13 && speed > 0){//real robot is .25 everywhere
-    		speed = .13;
+    	if (speed < MIN_TURN_SPEED && speed > 0){
+    		speed = MIN_TURN_SPEED;
     	}
-    	if(speed > -.13 && speed < 0){ 
-    		speed = -.13;
+    	if(speed > -MIN_TURN_SPEED && speed < 0){ 
+    		speed = -MIN_TURN_SPEED;
     	}
     	
     	return speed;
     	//setTurnSpeed(speed);
     }
-    
-    public double visionDistanceCorrection(){
-    	double error = (VISIONY_GOAL - Robot.vision.getVisionY());
-	
-    	return (VISIONY_P*error);
+   
+    public double fastVision(){
+    	double rightLeft;
+    	
+    	if(Robot.vision.getVisionX() < VISIONX_GOAL){
+    		rightLeft = (-1);
+    	}
+    	else{
+    		rightLeft = (1);
+    	}
+    	
+    	return rightLeft;
     }
-    
-    public double visionDrive(){
-    	double speed;
-    	speed = visionDistanceCorrection();
-    	
-    	if (speed > .7){
-    		speed = .7;
-    	}
-    	if(speed < -.7){ 
-    		speed = -.7;
-    	}
-    	
-    	if (speed < .13 && speed > 0){
-    		speed = .13;
-    	}
-    	if(speed > -.13 && speed < 0){ 
-    		speed = -.13;
-    	}
-    	
-    	
-    	return speed;
-    }
-    
-    
-    public double visionHeadingCorrection(){
-    	double error = (VISIONX_GOAL - Robot.vision.getVisionX());	
-    	
-    	return -((VISIONX_P)*error);
-    }
-    
-    public double visionTurn(){
-    	double speed;
-    	didTurnStart = true;
-    	speed = visionHeadingCorrection();
-    	
-    	if (speed > .7){
-    		speed = .7;
-    	}
-    	if(speed < -.7){ 
-    		speed = -.7;
-    	}
-    	
-    	if (speed < .3 && speed > 0){//TODO NEED TO BE TUNED FOR REAL ROBOT
-    		speed = .3;
-    	}
-    	if(speed > -.3 && speed < 0){ 
-    		speed = -.3;
-    	}
-    	
-    	
-    	return speed;
-    }
-    
 
-    
     public double getGyroVisionTarget(){
-    	double pixels = Robot.vision.getVisionX();
-    	testAngle = pixels*PIXELS_TO_ANGLE;
-    	double angle = testAngle;
-    	return angle;//when positive, need to turn right. same as set turn speed
+    	double pixelError = VISIONX_GOAL - Robot.vision.getVisionX();
+    	double gyroAngle = pixelError * PIXELS_TO_ANGLE;
+    	//testAngle = pixels*PIXELS_TO_ANGLE;
+    	//double angle = testAngle;
+    	return -gyroAngle;//when positive, need to turn right. same as set turn speed
     }
     
     
@@ -286,7 +227,7 @@ public class Chassis extends Subsystem {
     		error = error - 360;
     	}
 
-    	if ((error < 5) && (error > -5)){
+    	if ((error < 2) && (error > -2)){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();
@@ -303,7 +244,7 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.25){
+   		if(timer.get() >.17){
    			atTarget = true;
     	}
     	
@@ -383,7 +324,7 @@ public class Chassis extends Subsystem {
     		noGoal = true;
     	}
     	
-    	if ((current < (VISIONX_GOAL + 17)) && (current > (VISIONX_GOAL - 17))){
+    	if ((current < (VISIONX_GOAL + 5)) && (current > (VISIONX_GOAL - 5))){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();
@@ -400,7 +341,7 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.25){
+   		if(timer.get() >.1){
    			atTarget = true;
     	}
     	
