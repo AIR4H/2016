@@ -110,7 +110,7 @@ public class Chassis extends Subsystem {
     		setSpeed(left, right);
     	}
     	else{
-    		setSpeed(left*.78, right*.78);
+    		setSpeed(left*.78, right*.78);   //dm
     	}
     }
     

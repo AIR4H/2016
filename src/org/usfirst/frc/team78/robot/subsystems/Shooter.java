@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,8 +18,11 @@ public class Shooter extends Subsystem {
     
 
 	//MOTORS
-	CANTalon rightShooter = new CANTalon(RobotMap.RIGHT_SHOOTER);
-	CANTalon leftShooter = new CANTalon(RobotMap.LEFT_SHOOTER);
+	//CANTalon rightShooter = new CANTalon(RobotMap.RIGHT_SHOOTER); //change back to these
+	//CANTalon leftShooter = new CANTalon(RobotMap.LEFT_SHOOTER);
+	
+	Victor rightShooter = new Victor(RobotMap.RIGHT_SHOOTER);
+	Victor leftShooter = new Victor(RobotMap.LEFT_SHOOTER);
 	
 	//Solenoid
 	DoubleSolenoid lift = new DoubleSolenoid(RobotMap.SHOOTER_FOREWARD, RobotMap.SHOOTER_REVERSE);
@@ -56,6 +60,11 @@ public class Shooter extends Subsystem {
     public void setShooterSpeed(double speed){
     	rightShooter.set(speed);
     	leftShooter.set(-speed);
+    }
+    
+    public void setShooterCurve(double lspeed, double rspeed){
+    	rightShooter.set(rspeed);
+    	leftShooter.set(-lspeed);
     }
     
     public void setRightShooterRate(double rate){

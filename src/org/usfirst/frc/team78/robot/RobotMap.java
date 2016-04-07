@@ -4,6 +4,36 @@ package org.usfirst.frc.team78.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * 
+ * 
+ *		 		  .--syhddho-`                      `-oyys---.                  
+ *              .-yhys-----odmmmdhhddhhhhhyhhyyyyyyyhhmNmdsoosyh-...              
+ *             -s--..........ommmmmmmmmmhdmmdmNNNNNNNNmh-.`````````.s-            
+ *           .-----..........`.smmmmmmmhddhdddNNNNNNNd-.....```````` ``           
+ *          ------.............`-hmmmmmmdhdmdmNNNNNmo........-sh--``              
+ *         .-----.--sso--.........-syyyyyhhhhhhhhyo-........-dmshs-``             
+ *        `------smmmmmdhs.`.............................--.-odyho.```  `         
+ *        ------ommmmmddddo.......-shs........-syo.....ohhhs-...``-yh--. `        
+ *       -------smmmmmmmdm-.......-ddy-.......-ddh-...-dmhyNs...`.hNhhys ``       
+ *      .--------ymNmmmNd-.............................-oys-..---.-syyo. ```      
+ *     `------------------..................................-ddyy-.`````` ``      
+ *     ------------------....-sss--.................--.```..omhdhd..`````````     
+ *    .--------------......--dNNNd---..........-.-ydmmdy-.``.-oo-...``````````    
+ *    ----------------...-ssymNNNmoos-......----ymmmmNmmds.`..........````````    
+ *   --------------------mNNNNNNNmmmNm----------Nmdddmmmmh-``..........````````   
+ *  `--------------------hddmNNmdmddmy----------hNmmmmmmms...............``````   
+ *  .--------------------..--dNmmd---------------shdddhs--................``````  
+ *  -------------------------hmmds-------------------------.................````  
+ * `------------------------------------------------------...................```  
+ * .----------------------------------------------------------................``` 
+ * -----------------------..````````......................-----------..........`` 
+ * --------------------`                                   `------------........` 
+ * ----------------o-`                                        -------------.....` 
+ * `------------os-`                                            -o------------..  
+ *  `----oooooss-.                                                -so----------`  
+ *    .--oosss-.                                                   `-soo------`   
+ *       .---`                                                       `-sso--.     
+ *   
  */
 public class RobotMap {
 	
@@ -14,9 +44,13 @@ public class RobotMap {
 	final static public int RIGHT_DRIVE_1 = 2;
 	final static public int RIGHT_DRIVE_2 = 3;
 	
+	//TESTBASE SHOOTER
+	final static public int LEFT_SHOOTER = 9;
+	final static public int RIGHT_SHOOTER = 8;
+	
 	//MOTORS(CAN)
-	final static public int LEFT_SHOOTER = 0;
-	final static public int RIGHT_SHOOTER = 1;
+	//final static public int LEFT_SHOOTER = 0;
+	//final static public int RIGHT_SHOOTER = 1;
 	final static public int LEFT_INTAKE = 3;
 	final static public int RIGHT_INTAKE = 2;
 	/*final static public int PAN = 4;
@@ -61,7 +95,7 @@ public class RobotMap {
 	final static public double SHOOTER_INTAKE_SPEED = 0.60;
 	
 	// CONSTANTS
-	final static public double SHOOTER_LOW = 0.5;
+	final static public double SHOOTER_LOW = 0.41;
 	final static public double SHOOTER_MID = 0.9;
 	final static public double SHOOTER_HIGH = 1.0;
 	

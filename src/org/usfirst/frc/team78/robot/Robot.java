@@ -18,6 +18,9 @@ import org.usfirst.frc.team78.robot.commands.AutoTerrainShootLeft;
 import org.usfirst.frc.team78.robot.commands.DoNothing;
 import org.usfirst.frc.team78.robot.commands.DriveBackPlatform;
 import org.usfirst.frc.team78.robot.commands.DriveOverDefense;
+import org.usfirst.frc.team78.robot.commands.PunchPancake;
+import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
+import org.usfirst.frc.team78.robot.commands.StopShooter;
 import org.usfirst.frc.team78.robot.commands.StupidSimpleAuto;
 import org.usfirst.frc.team78.robot.commands.WeekZeroAuto;
 import org.usfirst.frc.team78.robot.commands.WeekZeroLowBar;
@@ -36,6 +39,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ *                                                                   `.`        
  */
 public class Robot extends IterativeRobot {
 
@@ -171,6 +175,9 @@ public class Robot extends IterativeRobot {
     	
     	//PROGRAM TESTS
     	SmartDashboard.putNumber("Vision Angle", Robot.chassis.testAngle);
+    	SmartDashboard.putData(new SetShooterSpeed(0.75));
+    	SmartDashboard.putData(new PunchPancake());
+    	SmartDashboard.putData(new StopShooter());
     	//SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
     	//SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
     	//SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);

@@ -34,6 +34,7 @@ import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 import org.usfirst.frc.team78.robot.commands.VisionRumble;
 import org.usfirst.frc.team78.robot.commands.VisionSnapshot;
+import org.usfirst.frc.team78.robot.commands.CurvedShot;
 
 
 
@@ -192,6 +193,10 @@ public class OI {
 		manShooterHigh = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_HIGH_BTN); 
 		manShooterHigh.whileHeld(new SetShooterSpeed(1));
 		manShooterHigh.whenReleased(new StopShooter());
+		
+		//manShooterHigh = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_HIGH_BTN); 
+		//manShooterHigh.whileHeld(new CurvedShot(.5, 1));
+		//manShooterHigh.whenReleased(new StopShooter());
 		
 		manPnPancake = new JoystickButton(manipulatorStick, RobotMap.PANCAKE_PN);
 		manPnPancake.whenPressed(new MovePancake("out"));
