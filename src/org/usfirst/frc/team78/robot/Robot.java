@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import org.usfirst.frc.team78.robot.commands.AutoSpyBox;
 import org.usfirst.frc.team78.robot.commands.AutoTerrainShootLeft;
 import org.usfirst.frc.team78.robot.commands.DoNothing;
-import org.usfirst.frc.team78.robot.commands.DriveBackPlatform;
+import org.usfirst.frc.team78.robot.commands.DriveToPlatform;
 import org.usfirst.frc.team78.robot.commands.DriveOverDefense;
 import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;

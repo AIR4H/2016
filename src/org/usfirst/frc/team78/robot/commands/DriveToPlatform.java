@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveBackPlatform extends Command {
+public class DriveToPlatform extends Command {
 
 	double startHeading;
 	double rightSpeed;
@@ -15,11 +15,12 @@ public class DriveBackPlatform extends Command {
 	double m_speed;
 	
 	
-    public DriveBackPlatform() {
+    public DriveToPlatform(double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
     	requires(Robot.chassis);
+    	m_speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -29,8 +30,8 @@ public class DriveBackPlatform extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	leftSpeed = -.2;
-    	rightSpeed = -.2;
+    	leftSpeed = m_speed;
+    	rightSpeed = m_speed;
     	
     	leftSpeed = leftSpeed + Robot.chassis.headingCorrection(startHeading);
     	rightSpeed = rightSpeed - Robot.chassis.headingCorrection(startHeading);

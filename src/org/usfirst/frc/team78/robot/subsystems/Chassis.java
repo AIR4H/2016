@@ -356,7 +356,7 @@ public class Chassis extends Subsystem {
     	boolean over = false;
     	double current = getRoll();
     	
-    	if(current >= DEFENSE_GYRO){
+    	if(Math.abs(current) >= DEFENSE_GYRO){
     		onDefense = true;
     	}
     	
