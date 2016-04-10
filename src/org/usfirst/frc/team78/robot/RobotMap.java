@@ -46,7 +46,7 @@ public class RobotMap {
 	
 	//TESTBASE SHOOTER
 	final static public int LEFT_SHOOTER = 9;
-	final static public int RIGHT_SHOOTER = 8;
+	final static public int RIGHT_SHOOTER = 8; //AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 	
 	//MOTORS(CAN)
 	//final static public int LEFT_SHOOTER = 0;

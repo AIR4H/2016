@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class StupidSimpleAuto extends CommandGroup {
+public class AutoCross extends CommandGroup {
     
-    public  StupidSimpleAuto() {
+    public  AutoCross() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -25,6 +25,7 @@ public class StupidSimpleAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
+    	//the auto formerly known as StupidSimpleAuto
     	addSequential(new DriveTime(-.8, 2));
     	addSequential(new DriveTime(0, 2));
     }

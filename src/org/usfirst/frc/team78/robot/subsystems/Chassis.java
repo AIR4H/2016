@@ -51,6 +51,8 @@ public class Chassis extends Subsystem {
 		//make a new variable called navx-mxp from <HomeDirectory>\navx-mxp\java\lib\navx_frc.jar
 		//right click Referenced Libraries, add the new variable
 	
+	//Solenoids
+	DoubleSolenoid brake = new DoubleSolenoid(RobotMap.BRAKE_FOREWARD, RobotMap.BRAKE_REVERSE);
 
 	
 	//VARIABLES
@@ -60,6 +62,7 @@ public class Chassis extends Subsystem {
 	Boolean onObstacle = false;
 	public boolean onDefense = false;
 	public boolean overDefense = false;
+	public boolean brakeState = false;
 	
 	
 	//CONSTANTS
@@ -103,14 +106,14 @@ public class Chassis extends Subsystem {
     	double left = Robot.oi.getDriverLeftStick();
     	double right = Robot.oi.getDriverRightStick();
     	
-    	if (Robot.oi.driverStick.getRawButton(7)){
+    	if (Robot.oi.driverStick.getRawButton(5)){
     		setSpeed(left*0.5, right*0.5);
     	}
-    	else if (Robot.oi.driverStick.getRawButton(8)){
+    	else if (Robot.oi.driverStick.getRawButton(7) && Robot.oi.driverStick.getRawButton(8)){
     		setSpeed(left, right);
     	}
     	else{
-    		setSpeed(left*.78, right*.78);   //dm
+    		setSpeed(left*.87, right*.87);
     	}
     }
     
@@ -461,7 +464,8 @@ public class Chassis extends Subsystem {
     	return ahrs.getDisplacementZ();//just look at all the different gets, figure out what is going on
     }
     
-    public boolean robotLevel(){
+   
+    /*public boolean robotLevel(){
     	if(Math.abs(getRoll()) > 2){
     		return false;
     	}else{
@@ -484,6 +488,18 @@ public class Chassis extends Subsystem {
     		}
     	}
     	return finalBool;
+    }*/
+    
+//______________________________________________________________________________ 
+//HAND BRAKE
+    public void brakeDown(){
+    	brake.set(DoubleSolenoid.Value.kForward);
+    	brakeState = true;
+    }
+    
+    public void brakeUp(){
+    	brake.set(DoubleSolenoid.Value.kReverse);
+    	brakeState = false;
     }
     
 }

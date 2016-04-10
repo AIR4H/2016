@@ -7,28 +7,32 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GetRollOverDefense extends Command {
-		double start;
-    public GetRollOverDefense() {
+public class AlternateBrake extends Command {
+
+    public AlternateBrake() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	start = Robot.chassis.getRoll();
-    	
+    	if (Robot.chassis.brakeState == false){
+    		Robot.chassis.brakeDown();
+    		Robot.chassis.brakeState = true;
+    	}
+    	else{
+    		Robot.chassis.brakeUp();
+    		Robot.chassis.brakeState = false;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.RollOverDefense(start);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

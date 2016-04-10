@@ -6,16 +6,15 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team78.robot.commands.AlternateBrake;
 import org.usfirst.frc.team78.robot.commands.AlternateIntake;
-import org.usfirst.frc.team78.robot.commands.AntiIntake;
 import org.usfirst.frc.team78.robot.commands.AntiIntakeGroup;
 import org.usfirst.frc.team78.robot.commands.DefaultIntake;
+import org.usfirst.frc.team78.robot.commands.DefendWithGyro;
 import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team78.robot.commands.DriveTime;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
-import org.usfirst.frc.team78.robot.commands.FastVision;
 import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
-import org.usfirst.frc.team78.robot.commands.Intake;
 import org.usfirst.frc.team78.robot.commands.IntakeGroup;
 import org.usfirst.frc.team78.robot.commands.MoveIntake;
 import org.usfirst.frc.team78.robot.commands.MovePancake;
@@ -24,12 +23,10 @@ import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.AlternateShooter;
 import org.usfirst.frc.team78.robot.commands.MoveShooter;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
-import org.usfirst.frc.team78.robot.commands.SetBrake;
+import org.usfirst.frc.team78.robot.commands.MoveBrake;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
-import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team78.robot.commands.StopShooter;
-import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 import org.usfirst.frc.team78.robot.commands.VisionRumble;
@@ -109,73 +106,31 @@ public class OI {
 		
 		
 		
-		
-		
-		
 		// DRIVER BUTTONS
+		
+		btn2 = new JoystickButton(driverStick, 2);
+		btn2.whenPressed(new AlternateBrake());
+		
+		btn4 = new JoystickButton(driverStick, 4);
+		btn4.whenPressed(new VisionRumble());
+		
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
+		
+		btn1 = new JoystickButton(driverStick, 1);
+		btn1.whileHeld(new DefendWithGyro());
+		btn1.whenReleased(new DriveWithJoysticks());
+		
 		
 		//btn4 = new JoystickButton(driverStick, 4);
 		//btn4.whileHeld(new VisionTurnDriver());
 		//btn5.whenReleased(new RumbleTest(0));
 		
-		btn5 = new JoystickButton(driverStick, 5);
-		btn5.whenPressed(new SetBrake("down"));
-		btn5.whenReleased(new SetBrake("up"));
 		
-		
-		
-		
-//__________________________________________________________________________________________________________________________________
-//WEEK ZERO WEIRD TEMPORARY BUTTONS
-		
-		/*btn1W = new JoystickButton(weekZeroMStick, 1);
-		btn1W.whenPressed(new Intake());
-		btn1W.whenReleased(new SetShooterSpeed(0));
-		
-		btn6W = new JoystickButton(weekZeroMStick, 6);
-		btn6W.whenPressed(new MoveShooter("up"));
-		btn6W.whenReleased(new MoveShooter("down"));
-		
-		btn5W = new JoystickButton(weekZeroMStick, 5);
-		btn5W.whenPressed(new AlternateIntake());
-		
-		btn4W = new JoystickButton(weekZeroMStick, 4);
-		btn4W.whenPressed(new ReadyShoot());
-		btn4W.whenReleased(new AntiReadyShoot());
-					
-		btn3W = new JoystickButton(weekZeroMStick, 3);
-		btn3W.whenPressed(new PunchPancake());
-		
-		btn2W = new JoystickButton(weekZeroMStick, 2);
-		btn2W.whenPressed(new ReadyShoot90());
-		btn2W.whenReleased(new AntiReadyShoot());
-		
-		btn7W = new JoystickButton(weekZeroMStick, 7);
-		btn7W.whileHeld(new StUCK());
-		
-		btn8W = new JoystickButton(weekZeroMStick, 8);
-		btn8W.whenPressed(new LowGoal());
-		btn8W.whenReleased(new SetShooterSpeed(0));*/
-		
-		
-		//btn6W = new JoystickButton(weekZeroMStick, 6);
-		//btn6W.whenPressed(new SetIntakeSpeed(.5));
-		
-		
-		//toggle intake
-		//toggle shooter
-		//spin up 
-		//fire
 		
 		
 		
 //__________________________________________________________________________________________________________________________________________
-		
-		//*****************************************
-		//NEED TO FIGURE OUT BUTTON NUMBERS ON XBOX STICK
-		//*****************************************
 		
 		// MANIPULATOR BUTTONS
 		manPnIntake = new JoystickButton(manipulatorStick, RobotMap.INTAKE_PN);
@@ -206,21 +161,7 @@ public class OI {
 		manShooterMid.whileHeld(new SetShooterSpeed(.67));
 		manShooterMid.whenReleased(new StopShooter());
 				
-		
-		/*btn5M = new JoystickButton(manipulatorStick, 5);
-		btn5M.whenPressed(new AlternateIntake());
-		
-		btn6M = new JoystickButton(manipulatorStick, 6);
-		btn6M.whenPressed(new AlternateShooter());
-		
-		btn8M = new JoystickButton(manipulatorStick, 8);
-		btn8M.whileHeld(new LowGoal());
-		btn8M.whenReleased(new SetShooterSpeed(0));
-		//btn8M.whenReleased(new SetShooterSpeed(0));
-		
-		//btn9M = new JoystickButton(manipulatorStick, 9);
-		//btn9M.whenPressed(new ResetSensors());*/
-		
+
 		
 //__________________________________________________________________________________________________________________________________________
 	

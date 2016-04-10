@@ -7,41 +7,55 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Intake extends Command {
+public class MoveBrake extends Command {
 
-    public Intake() {
+	String m_direction;
+	
+    public MoveBrake(String direction) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.intake);
-    	requires(Robot.shooter);
+    	//requires(Robot.shooter);
+    	
+    	m_direction = direction;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	
+    	//	Robot.brake.brakeDown();
+    		
+
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//double speed = Robot.oi.getManipulatorStick();
-    	Robot.intake.setIntakeSpeed(-0.5);
-    	Robot.shooter.setShooterSpeed(-0.35);
+    	
+    	Robot.chassis.brakeDown();
+    	
+    	if(m_direction == "up"){
+    		Robot.chassis.brakeUp();
+    	}
+    	else if(m_direction == "down"){
+    		Robot.chassis.brakeDown();;
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;//!Robot.oi.isStickPushed();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.setIntakeSpeed(0);
-    	Robot.shooter.setShooterSpeed(0);
+    	
+    //Robot.brake.brakeUp();
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

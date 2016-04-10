@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class TestCommand extends CommandGroup {
+public class AutoLowBar extends CommandGroup {
     
-    public  TestCommand() {
+    public  AutoLowBar() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -23,12 +23,12 @@ public class TestCommand extends CommandGroup {
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
-        // arm.
     	
-    	addSequential(new ResetSensors());
-    	addSequential(new DriveStraightDistance(10));
-    	addSequential(new Turn(180));
-    	addSequential(new DriveStraightDistance(10));
-    	addSequential(new Turn(0));
+    	addSequential(new MoveIntake("down"));
+    	addSequential(new DoNothing(1));
+    	//addSequential(new ResetSensors());
+    	//addSequential(new DoNothing(1));
+    	addSequential(new DriveTime(-0.8, 2));
+    	//addSequential(new Turn(180));
     }
 }
