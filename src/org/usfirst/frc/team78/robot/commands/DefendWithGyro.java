@@ -29,7 +29,7 @@ public class DefendWithGyro extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	leftStick = Robot.oi.getDriverLeftStick();
-    	rightStick = Robot.oi.getDriverRightStick();
+    	rightStick = leftStick;
     	
     	if (Robot.oi.driverStick.getRawButton(5)){
     		leftSpeed = leftStick*.5;

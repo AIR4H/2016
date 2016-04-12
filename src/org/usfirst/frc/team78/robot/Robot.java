@@ -173,12 +173,11 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
     	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
     	
+    	//DRIVER INDICATORS
+    	SmartDashboard.putBoolean("At Angle", Robot.chassis.isOnRamp());
     	
     	//PROGRAM TESTS
     	SmartDashboard.putNumber("Vision Angle", Robot.chassis.testAngle);
-    	SmartDashboard.putData(new SetShooterSpeed(0.75));
-    	SmartDashboard.putData(new PunchPancake());
-    	SmartDashboard.putData(new StopShooter());
     	//SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
     	//SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
     	//SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);

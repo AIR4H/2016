@@ -285,39 +285,6 @@ public class Chassis extends Subsystem {
     	
     }// end isAtDistanceTarget
     
-
-    public boolean isAtVisionDistance(){
-    	double current = Robot.vision.getVisionY();
-    	
-    	if (current == -1000){
-    		noGoal = true;
-    	}
-    	
-    	if ((current < (VISIONY_GOAL + 15)) && (current > (VISIONY_GOAL - 15))){
-    		if(timerStart == false){
-   				timerStart = true;
-   				timer.start();
-   			}
-    		
-   		}
-   	
-   		else{
-   		
-   			if(timerStart == true){
-    			timer.stop();
-    			timer.reset();
-    			timerStart = false;
-   			}
-   		}
-    	
-   		if(timer.get() >.15){
-   			atTarget = true;
-    	}
-    	
-    	return atTarget;
-    	
-    }// end isAtDistanceTarget
-    
     
     public boolean isAtVisionHeading(){
     	
