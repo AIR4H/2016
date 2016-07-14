@@ -1,6 +1,5 @@
 package org.usfirst.frc.team78.robot.commands;
 
-import org.usfirst.frc.team78.robot.OI;
 import org.usfirst.frc.team78.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,13 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class VisionSnapshot extends Command {
-	double m_angle;
-	double startAngle;
-	double target;
-	double speed;
+public class FastVision extends Command {
+
+	int m_direction;
 	
-    public VisionSnapshot() {
+    public FastVision() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -22,22 +19,17 @@ public class VisionSnapshot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.chassis.resetSensorData();
-    	m_angle = Robot.chassis.getGyroVisionTarget();
-    	startAngle = Robot.chassis.getAngle();
-    	
+    	m_direction = Robot.chassis.fastVision();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = Robot.chassis.turnAngleAdditional((startAngle + m_angle));
-    	
-    	Robot.chassis.setTurnSpeed(speed);
+    	Robot.chassis.setTurnSpeed(Robot.chassis.MIN_TURN_SPEED * m_direction);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.isAtTurnTargetFine(startAngle + m_angle);
+        return Robot.chassis.isAtVisionHeading();
     }
 
     // Called once after isFinished returns true

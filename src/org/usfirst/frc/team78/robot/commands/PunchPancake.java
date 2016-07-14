@@ -22,7 +22,7 @@ public class PunchPancake extends Command {
     protected void initialize() {
 
     	Robot.shooter.pancakeOut();
-    	Timer.delay(.5);
+    	Timer.delay(.1);
     	Robot.shooter.pancakeIn();
     }
 

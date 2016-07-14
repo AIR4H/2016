@@ -17,7 +17,7 @@ public class ResetSensors extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.resetSensorData();
-    	Robot.shooter.resetSensorData();
+    //	Robot.shooter.resetSensorData();
     }
 
     // Called repeatedly when this Command is scheduled to run

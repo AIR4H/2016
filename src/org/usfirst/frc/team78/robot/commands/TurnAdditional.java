@@ -36,7 +36,7 @@ public class TurnAdditional extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.isAtTurnTarget(startAngle + m_angle);
+        return Robot.chassis.isAtTurnTargetFine(startAngle + m_angle);
     }
 
     // Called once after isFinished returns true

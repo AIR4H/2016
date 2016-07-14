@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -53,6 +54,9 @@ public class Chassis extends Subsystem {
 	
 	//Solenoids
 	DoubleSolenoid brake = new DoubleSolenoid(RobotMap.BRAKE_FOREWARD, RobotMap.BRAKE_REVERSE);
+	
+	//Relays
+	Relay spike = new Relay(RobotMap.FLASHLIGHT);
 
 	
 	//VARIABLES
@@ -63,6 +67,8 @@ public class Chassis extends Subsystem {
 	public boolean onDefense = false;
 	public boolean overDefense = false;
 	public boolean brakeState = false;
+	public double counts = 0;
+	public boolean lightState = false;
 	
 	
 	//CONSTANTS
@@ -70,13 +76,13 @@ public class Chassis extends Subsystem {
 	//final double GYRO_P = (.017);	//Pre 15March value
 	final double GYRO_P = (.025);//.003; test bot
 	final double DISTANCE_P = 0.00035;
-	final double VISIONX_GOAL = 22;//TUNE
+	final double VISIONX_GOAL = -20;//TUNE
 	final double VISIONY_GOAL = 200;
 	final double PIXELS_TO_ANGLE = 9.5969;
-	final double DEFENSE_GYRO = 4;
-	final double PLATFORM_GYRO = 4;
-	public final double MAX_TURN_SPEED = .4;
-	public final double MIN_TURN_SPEED =.15;
+	final double DEFENSE_GYRO = 1;
+	final double PLATFORM_GYRO = 2.5;
+	public final double MAX_TURN_SPEED = .8;
+	public final double MIN_TURN_SPEED =.6;
 
 
 	
@@ -107,13 +113,13 @@ public class Chassis extends Subsystem {
     	double right = Robot.oi.getDriverRightStick();
     	
     	if (Robot.oi.driverStick.getRawButton(5)){
-    		setSpeed(left*0.5, right*0.5);
+    		setSpeed(left*0.4, right*0.4);
     	}
-    	else if (Robot.oi.driverStick.getRawButton(7) && Robot.oi.driverStick.getRawButton(8)){
+    	/*else if (Robot.oi.driverStick.getRawButton(7) && Robot.oi.driverStick.getRawButton(8)){
     		setSpeed(left, right);
-    	}
+    	}*/
     	else{
-    		setSpeed(left*.87, right*.87);
+    		setSpeed(left, right);
     	}
     }
     
@@ -129,7 +135,7 @@ public class Chassis extends Subsystem {
     }
     
     
-    public void setTurnSpeed(double speed){
+    public void setTurnSpeed(double speed){//positive is a right turn
     	setSpeed(speed, -speed);
     }
     
@@ -147,6 +153,13 @@ public class Chassis extends Subsystem {
     	}
     	else if(speed > -.25 && speed < 0){
     		speed = -.25;
+    	}
+    	
+    	if (speed > .5){
+    		speed = .5;
+    	}
+    	else if(speed < -.5){
+    		speed = -.5;
     	}
     	
     	return speed;
@@ -173,7 +186,7 @@ public class Chassis extends Subsystem {
     public double turnAngleAdditional(double target){
     	double speed;
 
-    	speed = headingCorrection(target)*(.22222222);//So that turns aren't as aggressive as heading correction. Makes constant effectively .005555
+    	speed = headingCorrection(target);//.355555So that turns aren't as aggressive as heading correction. Makes constant effectively .005555
     	
     	if (speed > MAX_TURN_SPEED){
     		speed = MAX_TURN_SPEED;
@@ -193,8 +206,8 @@ public class Chassis extends Subsystem {
     	//setTurnSpeed(speed);
     }
    
-    public double fastVision(){
-    	double rightLeft;
+    public int fastVision(){
+    	int rightLeft;
     	
     	if(Robot.vision.getVisionX() < VISIONX_GOAL){
     		rightLeft = (-1);
@@ -207,18 +220,17 @@ public class Chassis extends Subsystem {
     }
 
     public double getGyroVisionTarget(){
-    	double pixelError = (VISIONX_GOAL) - Robot.vision.getVisionX();
-    	double gyroAngle = (pixelError/PIXELS_TO_ANGLE)*(-1);
-    	//gyroAngle = gyroAngle*(-1);
-    	testAngle = gyroAngle;
+    	double pixelError = Robot.vision.getVisionX() - VISIONX_GOAL;
+    	double gyroAngle = (pixelError/PIXELS_TO_ANGLE);
+    	//testAngle = gyroAngle;
     	return gyroAngle;//when positive, need to turn right. same as set turn speed
     }
     
     
 //_________________________________________________________________________________________________________________________________________
 //LOGIC METHODS
-    
-    public boolean isAtTurnTarget(double target){
+                                   
+    public boolean isAtTurnTargetRough(double target){
     	atTarget = false;
     	
     	double error = target - getAngle();
@@ -230,7 +242,7 @@ public class Chassis extends Subsystem {
     		error = error - 360;
     	}
 
-    	if ((error < 2) && (error > -2)){
+    	if ((error < 4) && (error > -4)){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();
@@ -247,19 +259,44 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.17){
+   		if(timer.get() >.15){
    			atTarget = true;
     	}
     	
     	return atTarget;
     	
-    }// end isAtTurnTarget
+    }// end isAtTurnTargetRough
+    
+    public boolean isAtTurnTargetFine(double target){
+    	atTarget = false;
+    	
+    	double error = target - getAngle();
+    	
+    	if (error < -180){
+    		error = error + 360;
+    	}
+    	else if (error > 180){
+    		error = error - 360;
+    	}
+
+    	if(Math.abs(error) < 2){
+    		atTarget = true;
+    	}
+    	
+    	return atTarget;
+    	
+    }// end isAtTurnTargetFine
     
     public boolean isAtDistanceTarget(double target){
     	boolean atTarget = false;
-    	double current = (getLeftEnc()); //+ getRightEnc())/2;
+    	double current = (getRightEnc()); //+ getRightEnc())/2;
+    	double error = target - current;
     	
-    	if (current < (target+75) && current > (target-75)){
+    	if(Math.abs(error) < 30){
+    		atTarget = true;
+    	}
+    	
+    	/*if (current < (target+75) && current > (target-75)){
     		if(timerStart == false){
     			timerStart = true;
     			timer.start();
@@ -279,7 +316,7 @@ public class Chassis extends Subsystem {
     	if(timer.get() >.25){
     		atTarget = true;
     
-    	}
+    	}*/
     	
     	return atTarget;
     	
@@ -294,7 +331,11 @@ public class Chassis extends Subsystem {
     		noGoal = true;
     	}
     	
-    	if ((current < (VISIONX_GOAL + 5)) && (current > (VISIONX_GOAL - 5))){
+    	if ((current < (VISIONX_GOAL + 13)) && (current > (VISIONX_GOAL - 13))){
+    		atTarget = true;
+    	}
+    	
+    	/*if ((current < (VISIONX_GOAL + 13)) && (current > (VISIONX_GOAL - 13))){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();
@@ -311,26 +352,45 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.1){
+   		if(timer.get() >.15){
    			atTarget = true;
-    	}
+    	}*/
     	
     	return atTarget;
     	
     }// end isAtTurnTarget
 
+    public Boolean isOverCounterDefense(){
+    	Boolean over = false;
+    	double current = getRoll();
+    	
+    	if(current < -DEFENSE_GYRO){
+    		onDefense = true;
+    	}
+    	
+    	if(current < 2 && current > -5 && onDefense){
+    		counts = counts + 1;
+    	}
+    	
+    	if(counts > 8888){//need to figure out the big number
+    		over = true;
+    	}
+    		
+    	
+    	return over;
+    }
     
     
-    public Boolean isOverDefense(){ //IN COMMAND, NEED TO RESET ON AND OVER DEFENSE	TIMER
+    public Boolean isOverDefense(){
     	
     	boolean over = false;
     	double current = getRoll();
     	
-    	if(Math.abs(current) >= DEFENSE_GYRO){
+    	if(Math.abs(current) >= 10){//check for pitch down
     		onDefense = true;
     	}
     	
-    	if(current < 3 && current > -3 && onDefense){
+    	if(current < 6 && current > -6 && onDefense){
     		overDefense = true;
     	}
     	else{
@@ -354,18 +414,23 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.3){
+   		if(timer.get() >.5){
    			over = true;
     	}
     	
     	return over;
     }
+  /*  
+    public Boolean getIsOverDefense(){
+    	
+    	return isOverDefense();
+    }*/
     
     public Boolean isOnRamp(){
     	boolean ramp = false;
     	double current = getRoll();
     	
-    	if(current >= PLATFORM_GYRO){
+    	if(Math.abs(current) >= PLATFORM_GYRO){
     		ramp = true;
     	}
     	
@@ -395,11 +460,11 @@ public class Chassis extends Subsystem {
     }
     
     public double getLeftEnc(){
-    	return leftEnc.getRaw();
+    	return -leftEnc.getRaw();
     }
     
     public double getRightEnc(){
-    	return -rightEnc.getRaw();
+    	return rightEnc.getRaw();
     }
     
     public double getUltra(){
@@ -416,7 +481,7 @@ public class Chassis extends Subsystem {
     }
     
     public double getRoll(){
-    	return ahrs.getRoll();//just look at all the different gets, figure out what is going on
+    	return -ahrs.getRoll();//just look at all the different gets, figure out what is going on
     }
     
     public float getDisplacementX(){
@@ -468,5 +533,28 @@ public class Chassis extends Subsystem {
     	brake.set(DoubleSolenoid.Value.kReverse);
     	brakeState = false;
     }
+
+//______________________________________________________________________________ 
+//FLASHLIGHT
+    public void lightOn(){
+    	spike.set(Relay.Value.kForward);
+    	lightState = true;
+    }
     
+    public void lightOff(){
+    	spike.set(Relay.Value.kOff);
+    	timer.delay(.1);
+    	spike.set(Relay.Value.kForward);
+    	timer.delay(.1);
+    	spike.set(Relay.Value.kOff);
+    	timer.delay(.1);
+    	spike.set(Relay.Value.kForward);
+    	timer.delay(.1);
+    	spike.set(Relay.Value.kOff); 
+    	lightState = false;
+    }
+
 }
+
+
+

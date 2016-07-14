@@ -19,7 +19,7 @@ public class DriveStraightDistance extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
-    	m_distance_clicks = feet * 310;
+    	m_distance_clicks = feet * 300;
 
     	//setTimeout(17);
     }

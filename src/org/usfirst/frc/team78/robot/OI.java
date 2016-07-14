@@ -9,11 +9,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team78.robot.commands.AlternateBrake;
 import org.usfirst.frc.team78.robot.commands.AlternateIntake;
 import org.usfirst.frc.team78.robot.commands.AntiIntakeGroup;
+import org.usfirst.frc.team78.robot.commands.ChangeLight;
 import org.usfirst.frc.team78.robot.commands.DefaultIntake;
 import org.usfirst.frc.team78.robot.commands.DefendWithGyro;
 import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team78.robot.commands.DriveTime;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team78.robot.commands.FastVision;
 import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
 import org.usfirst.frc.team78.robot.commands.IntakeGroup;
 import org.usfirst.frc.team78.robot.commands.MoveIntake;
@@ -27,6 +29,7 @@ import org.usfirst.frc.team78.robot.commands.MoveBrake;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team78.robot.commands.StopShooter;
+import org.usfirst.frc.team78.robot.commands.SuperIntake;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 import org.usfirst.frc.team78.robot.commands.VisionRumble;
@@ -66,6 +69,7 @@ public class OI {
 	public Button manPnIntake;
 	public Button manPnShooter;
 	public Button manIntake;
+	public Button manSuperIntake;
 	
 	//TEST STICK
 	public Button btn1T;
@@ -108,8 +112,8 @@ public class OI {
 		
 		// DRIVER BUTTONS
 		
-		btn2 = new JoystickButton(driverStick, 2);
-		btn2.whenPressed(new AlternateBrake());
+		btn1 = new JoystickButton(driverStick, 1);
+		btn1.whenPressed(new AlternateBrake());
 		
 		btn4 = new JoystickButton(driverStick, 4);
 		btn4.whenPressed(new VisionRumble());
@@ -117,14 +121,18 @@ public class OI {
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
-		btn1 = new JoystickButton(driverStick, 1);
-		btn1.whileHeld(new DefendWithGyro());
-		btn1.whenReleased(new DriveWithJoysticks());
+		btn2 = new JoystickButton(driverStick, 2);
+		btn2.whileHeld(new DefendWithGyro());
+		btn2.whenReleased(new DriveWithJoysticks());
+		
+		btn8 = new JoystickButton(driverStick, 8);
+		btn8.whenPressed(new ChangeLight());
+		btn8.whenReleased(new ChangeLight());
 		
 		
 		//btn4 = new JoystickButton(driverStick, 4);
-		//btn4.whileHeld(new VisionTurnDriver());
-		//btn5.whenReleased(new RumbleTest(0));
+		//btn4.whenPressed(new VisionSnapshot());
+		//ur btn5.whenReleased(new RumbleTest(0));
 		
 		
 		
@@ -158,10 +166,13 @@ public class OI {
 		manPnPancake.whenReleased(new MovePancake("in"));
 				
 		manShooterMid = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_MID_BTN);
-		manShooterMid.whileHeld(new SetShooterSpeed(.67));
+		manShooterMid.whileHeld(new SetShooterSpeed(.55));
 		manShooterMid.whenReleased(new StopShooter());
 				
-
+		
+		manSuperIntake = new JoystickButton(manipulatorStick, RobotMap.SUPER_INTAKE);
+		manSuperIntake.whileHeld(new SuperIntake());
+		manSuperIntake.whenReleased(new StopShooter());
 		
 //__________________________________________________________________________________________________________________________________________
 	
@@ -170,13 +181,13 @@ public class OI {
 	
 		
 		btn2T = new JoystickButton(tStick, 2);
-		btn2T.whenPressed(new Turn(90));
+		btn2T.whenPressed(new Turn(-134));
 		
 		btn3T = new JoystickButton(tStick, 3);
 		btn3T.whenPressed(new TurnAdditional(-5));
 		
 		btn4T = new JoystickButton(tStick, 4);
-		btn4T.whenPressed(new VisionRumble());
+		btn4T.whenPressed(new DriveStraightDistance(10));
 		//Robot.chassis.getGyroVisionTarget())
 		
 	}

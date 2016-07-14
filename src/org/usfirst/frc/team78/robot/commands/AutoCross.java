@@ -26,7 +26,8 @@ public class AutoCross extends CommandGroup {
         // arm.
     	
     	//the auto formerly known as StupidSimpleAuto
-    	addSequential(new DriveTime(-.8, 2));
+    	addSequential(new DoNothing(8));
+    	addSequential(new DriveTime(-.8, 2.5));
     	addSequential(new DriveTime(0, 2));
     }
 }

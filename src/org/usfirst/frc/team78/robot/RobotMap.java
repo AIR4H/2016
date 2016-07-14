@@ -44,19 +44,12 @@ public class RobotMap {
 	final static public int RIGHT_DRIVE_1 = 2;
 	final static public int RIGHT_DRIVE_2 = 3;
 	
-	//TESTBASE SHOOTER
-	final static public int LEFT_SHOOTER = 9;
-	final static public int RIGHT_SHOOTER = 8; //AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-	
 	//MOTORS(CAN)
-	//final static public int LEFT_SHOOTER = 0;
-	//final static public int RIGHT_SHOOTER = 1;
+	final static public int LEFT_SHOOTER = 0;
+	final static public int RIGHT_SHOOTER = 1;
 	final static public int LEFT_INTAKE = 3;
 	final static public int RIGHT_INTAKE = 2;
-	/*final static public int PAN = 4;
-	final static public int TILT = 5;
-	final static public int RIGHT_SHOOTER = 6;
-	final static public int LEFT_SHOOTER = 7;*/
+	
 	
 	//SOLENOIDS
 	final static public int SHOOTER_FOREWARD = 0;
@@ -68,20 +61,23 @@ public class RobotMap {
 	final static public int BRAKE_FOREWARD = 6;
 	final static public int BRAKE_REVERSE = 7;
 	
+	//RELAYS
+	final static public int FLASHLIGHT = 0;
+	
 	
 	//ANALOG SENSORS
 	final static public int GYRO = 0;
 	
 	
 	//DIGITAL IO
-	final static public int LEFT_ENC_A = 0;//blue is A, yellow is b, brown is ground, orange is 5v
-	final static public int LEFT_ENC_B = 1;
-	final static public int RIGHT_ENC_A = 2;
-	final static public int RIGHT_ENC_B = 3;
-	final static public int RIGHT_SHOOTER_ENC_A = 4;
-	final static public int RIGHT_SHOOTER_ENC_B = 5;
-	final static public int LEFT_SHOOTER_ENC_A = 6;
-	final static public int LEFT_SHOOTER_ENC_B = 7;
+	final public static int LEFT_ENC_A = 0;//blue is A, yellow is b, brown is ground, orange is 5v
+	final public static int LEFT_ENC_B = 1;
+	final public static int RIGHT_ENC_A = 2;
+	final public static int RIGHT_ENC_B = 3;
+	//final static public int RIGHT_SHOOTER_ENC_A = 4;
+	//final static public int RIGHT_SHOOTER_ENC_B = 5;
+	//final static public int LEFT_SHOOTER_ENC_A = 6;
+	//final static public int LEFT_SHOOTER_ENC_B = 7;
 	
 	//BUTTONS
 	final static public int SHOOTER_PN = 6;
@@ -89,6 +85,7 @@ public class RobotMap {
 	final static public int PANCAKE_PN = 2;
 	final static public int SHOOTER_MID_BTN = 1;
 	final static public int SHOOTER_HIGH_BTN = 4;
+	final static public int SUPER_INTAKE = 3;
 	
 	// FACTORS
 	final static public double INTAKE_SPEED = 0.75;

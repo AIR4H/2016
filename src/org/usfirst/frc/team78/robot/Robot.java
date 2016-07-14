@@ -2,6 +2,7 @@
 package org.usfirst.frc.team78.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.NamedSendable;
@@ -17,8 +18,9 @@ import org.usfirst.frc.team78.robot.commands.AutoHighGoal2;
 import org.usfirst.frc.team78.robot.commands.AutoHighGoal3;
 import org.usfirst.frc.team78.robot.commands.AutoHighGoal4;
 import org.usfirst.frc.team78.robot.commands.AutoLowBar;
+import org.usfirst.frc.team78.robot.commands.AutoLowGoalLowBar;
+import org.usfirst.frc.team78.robot.commands.AutoHighGoalLowBar;
 import org.usfirst.frc.team78.robot.commands.AutoSpyBox;
-import org.usfirst.frc.team78.robot.commands.AutoTerrainShootLeft;
 import org.usfirst.frc.team78.robot.commands.DoNothing;
 import org.usfirst.frc.team78.robot.commands.DriveToPlatform;
 import org.usfirst.frc.team78.robot.commands.DriveOverDefense;
@@ -30,8 +32,15 @@ import org.usfirst.frc.team78.robot.subsystems.Intake;
 import org.usfirst.frc.team78.robot.subsystems.Shooter;
 import org.usfirst.frc.team78.robot.subsystems.Vision;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.FlipAxis;
+import com.ni.vision.NIVision.ImageType;
+
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -52,8 +61,11 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     SendableChooser chooser;
     public static NetworkTable table;
+    
+    int session;
+    Image frame;
 
-
+    
 
 	
     /**
@@ -63,19 +75,39 @@ public class Robot extends IterativeRobot {
     public void robotInit() {//read about ahrs reset, fix slow mode
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Low Bar", new AutoLowBar());
-        	chooser.addObject("Position 2 High Goal", new AutoHighGoal2());
+        chooser.addDefault("High Goal", new AutoHighGoalLowBar());
+        	/*chooser.addObject("Position 2 High Goal", new AutoHighGoal2());
         	chooser.addObject("Position 3 High Goal", new AutoHighGoal3());
-        	chooser.addObject("Position 4 High Goal", new AutoHighGoal4());
+        	chooser.addObject("Position 4 High Goal", new AutoHighGoal4());*/
         	chooser.addObject("Do Nothing", new DoNothing(3));
+        	chooser.addObject("Low Goal", new AutoLowGoalLowBar());
         	chooser.addObject("Cross", new AutoCross());
+        	
 
         SmartDashboard.putData("Auto mode", chooser);
     	
-        CameraServer server;
+       /* USBCamera cam = new USBCamera("cam0");
+        cam = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        Image frame = new Image();
+        frame = (NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0));
+        NIVision.IMAQdxConfigureGrab(0);
+        NIVision.IMAQdxStartAcquisition(0);*/
+        
+        /*frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        session = NIVision.IMAQdxOpenCamera("cam0",
+                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
+        NIVision.IMAQdxStartAcquisition(session);*/
+        
+
+        
+        
+        /*CameraServer server;
         server = CameraServer.getInstance();
     	server.setQuality(40);
-    	server.startAutomaticCapture("cam0");
+    	server.startAutomaticCapture("cam0");*/
 
     	table = NetworkTable.getTable("magicland");
     	
@@ -178,6 +210,10 @@ public class Robot extends IterativeRobot {
     	
     	//PROGRAM TESTS
     	SmartDashboard.putNumber("Vision Angle", Robot.chassis.testAngle);
+    	SmartDashboard.putNumber("Counts", Robot.chassis.counts);
+    	//SmartDashboard.putBoolean("On Defense", Robot.chassis.isOverDefense());
+    	//SmartDashboard.putBoolean("On Defense", Robot.chassis.isOverDefense());
+    	//SmartDashboard.putBoolean("On Defense", Robot.chassis.onDefense);
     	//SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
     	//SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
     	//SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);
@@ -196,7 +232,12 @@ public class Robot extends IterativeRobot {
     	//SmartDashboard.putData(new DriveBackPlatform());
     	//SmartDashboard.putData(new DriveOverDefense(.3));
     
-        	
+    	//CAMERA
+    	//NIVision.IMAQdxGrab(session, frame, 1);
+    	//NIVision.imaqFlip(frame, frame, NIVision.FlipAxis.HORIZONTAL_AXIS);
+        //CameraServer.getInstance().setImage(frame);
+    	
+    	
         Scheduler.getInstance().run();
     }
     

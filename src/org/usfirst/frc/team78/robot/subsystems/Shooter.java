@@ -18,19 +18,19 @@ public class Shooter extends Subsystem {
     
 
 	//MOTORS
-	//CANTalon rightShooter = new CANTalon(RobotMap.RIGHT_SHOOTER); //change back to these
-	//CANTalon leftShooter = new CANTalon(RobotMap.LEFT_SHOOTER);
+	CANTalon rightShooter = new CANTalon(RobotMap.RIGHT_SHOOTER); //change back to these
+	CANTalon leftShooter = new CANTalon(RobotMap.LEFT_SHOOTER);
 	
-	Victor rightShooter = new Victor(RobotMap.RIGHT_SHOOTER);
-	Victor leftShooter = new Victor(RobotMap.LEFT_SHOOTER);
+	//Victor rightShooter = new Victor(RobotMap.RIGHT_SHOOTER);
+	//Victor leftShooter = new Victor(RobotMap.LEFT_SHOOTER);
 	
 	//Solenoid
 	DoubleSolenoid lift = new DoubleSolenoid(RobotMap.SHOOTER_FOREWARD, RobotMap.SHOOTER_REVERSE);
 	DoubleSolenoid pan = new DoubleSolenoid(RobotMap.SHOOTER_PAN_FOREWARD, RobotMap.SHOOTER_PAN_REVERSE);
 	
 	//SENSORS
-	Encoder rightEnc = new Encoder(RobotMap.RIGHT_SHOOTER_ENC_A, RobotMap.RIGHT_SHOOTER_ENC_B);
-	Encoder leftEnc = new Encoder(RobotMap.LEFT_SHOOTER_ENC_A, RobotMap.LEFT_SHOOTER_ENC_B);
+	//Encoder rightEnc = new Encoder(RobotMap.RIGHT_SHOOTER_ENC_A, RobotMap.RIGHT_SHOOTER_ENC_B);
+	//Encoder leftEnc = new Encoder(RobotMap.LEFT_SHOOTER_ENC_A, RobotMap.LEFT_SHOOTER_ENC_B);
 	
 	//VARIABLES
 	public double shooterSpeed = 0;
@@ -67,7 +67,7 @@ public class Shooter extends Subsystem {
     	leftShooter.set(-lspeed);
     }
     
-    public void setRightShooterRate(double rate){
+   /* public void setRightShooterRate(double rate){
     	rateError = rate - getRightShooterRate();
     	pComponent = (SHOOTER_P)*rateError;
     	iComponent = (SHOOTER_I)*(rateError + (2/3)*iComponent);
@@ -77,13 +77,13 @@ public class Shooter extends Subsystem {
     	shooterSpeed = shooterSpeed + pComponent + iComponent;
     	setShooterSpeed(shooterSpeed);
 
-    }//end setShooterRate
+    }//end setShooterRate*/
     
     public void stopShooter(){
     	setShooterSpeed(0);
     }
     
-    public boolean isAtShooterRate (double targetRate){
+   /* public boolean isAtShooterRate (double targetRate){
     	boolean atRate = false;
     	
     	double current = getRightShooterRate();
@@ -110,14 +110,14 @@ public class Shooter extends Subsystem {
     	}
     	return atRate;
     	
-    }// end isAtTurnTarget
+    }// end isAtTurnTarget*/
     
 
     
 //____________________________________________________________________________________________________________________________
 //SENSOR METHODS
     
-    public double getRightShooterEnc(){
+    /*public double getRightShooterEnc(){
     	return -rightEnc.getRaw();
     }
     
@@ -128,7 +128,7 @@ public class Shooter extends Subsystem {
     public void resetSensorData(){
     	rightEnc.reset();
     	leftEnc.reset();
-    }
+    }*/
 //____________________________________________________________________________________________________________________________________________
 //pneumatic methods
     

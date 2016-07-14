@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoTerrainShootLeft extends CommandGroup {
+public class SuperIntake extends CommandGroup {
     
-    public  AutoTerrainShootLeft() {
+    public  SuperIntake() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -25,17 +25,6 @@ public class AutoTerrainShootLeft extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new MoveIntake("up"));
-    	addSequential(new DriveStraightDistance(11));
-    	/*addSequential(new Turn(25));
-    	addSequential(new VisionTurnAuto());
-    	addSequential(new MoveIntake("down"));
-    	addSequential(new DoNothing(.5));
-    	addSequential(new MoveShooter("up"));
-    	addSequential(new SetShooterSpeed(1));
-    	addSequential(new DoNothing(.75));
-    	addSequential(new PunchPancake());
-    	addSequential(new SetShooterSpeed(0));*/
-    	
+    	addSequential(new SetShooterSpeed(-.8));
     }
 }

@@ -17,6 +17,8 @@ public class Vision extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
+    double X = 0;
+	
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -31,14 +33,15 @@ public class Vision extends Subsystem {
     }*/
     
     public double getVisionX(){
-    	double X = 0;
+
     	try {
     		X = Robot.table.getDouble("X");
     	} catch ( Exception e){
-    		return -1000;
+    		X = -1000;
     	}
     	return X;
-    	}
+
+    }
     
     public double getVisionY(){
     	//return Robot.table.getDouble("Y");
