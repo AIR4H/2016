@@ -203,13 +203,15 @@ public class Robot extends IterativeRobot {
     	
     	//VISION
     	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
+    	SmartDashboard.putNumber("Jetson X Act",Robot.table.getDouble("X"));
     	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
     	
     	//DRIVER INDICATORS
     	SmartDashboard.putBoolean("At Angle", Robot.chassis.isOnRamp());
     	
     	//PROGRAM TESTS
-    	SmartDashboard.putNumber("Vision Angle", Robot.chassis.testAngle);
+    	SmartDashboard.putNumber("Vision Angle",Robot.chassis.getGyroVisionTarget());// Robot.chassis.testAngle);
+    	SmartDashboard.putNumber("Gyro Angle", Robot.chassis.getAngle());
     	SmartDashboard.putNumber("Counts", Robot.chassis.counts);
     	//SmartDashboard.putBoolean("On Defense", Robot.chassis.isOverDefense());
     	//SmartDashboard.putBoolean("On Defense", Robot.chassis.isOverDefense());

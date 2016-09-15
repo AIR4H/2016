@@ -33,8 +33,8 @@ public class Rumble extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
-		OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
+    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 0);
+		OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 0);
     }
 
     // Called when another command which requires one or more of the same
