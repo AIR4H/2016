@@ -48,8 +48,8 @@ public class OI {
 	//JOYSTICKS
 	public static Joystick driverStick;
 	public static Joystick manipulatorStick;
-	public static Joystick tStick;
-	public Joystick weekZeroMStick;
+	//public static Joystick tStick;
+	//public Joystick weekZeroMStick;
 	
 	
 	//DRIVER BUTTONS
@@ -105,8 +105,8 @@ public class OI {
 	public OI(){
 		driverStick = new Joystick(0);
 		manipulatorStick = new Joystick(1);
-		tStick = new Joystick(2);
-		weekZeroMStick = new Joystick(3);
+		//tStick = new Joystick(2);
+		//weekZeroMStick = new Joystick(3);
 		
 		
 		
@@ -176,7 +176,7 @@ public class OI {
 		
 //__________________________________________________________________________________________________________________________________________
 	
-		btn1T = new JoystickButton(tStick, 1);
+		/*btn1T = new JoystickButton(tStick, 1);
 		btn1T.whileHeld(new HeadingCorrection());
 	
 		
@@ -189,7 +189,7 @@ public class OI {
 		btn4T = new JoystickButton(tStick, 4);
 		btn4T.whenPressed(new DriveStraightDistance(10));
 		//Robot.chassis.getGyroVisionTarget())
-		
+		*/
 	}
 	
 	///DRIVER STICK

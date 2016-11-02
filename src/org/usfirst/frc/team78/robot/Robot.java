@@ -109,7 +109,7 @@ public class Robot extends IterativeRobot {
     	server.setQuality(40);
     	server.startAutomaticCapture("cam0");*/
 
-    	table = NetworkTable.getTable("magicland");
+    	//table = NetworkTable.getTable("magicland");
     	
     	Compressor c = new Compressor(0);
     	c.setClosedLoopControl(true);
@@ -190,29 +190,29 @@ public class Robot extends IterativeRobot {
     	
     	
     	//SENSOR DATA
-    	SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
-    	SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
-    	SmartDashboard.putNumber("Right Stick", Robot.oi.getDriverRightStick());
-    	SmartDashboard.putNumber("Left Stick", Robot.oi.getDriverLeftStick());
+    		//SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
+    		//SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
+    		//SmartDashboard.putNumber("Right Stick", Robot.oi.getDriverRightStick());
+    		//SmartDashboard.putNumber("Left Stick", Robot.oi.getDriverLeftStick());
     	//SmartDashboard.putNumber("Shooter Rate", Robot.shooter.getRightShooterRate());
-    	SmartDashboard.putNumber("Get Angle", Robot.chassis.getAngle());
-    	SmartDashboard.putNumber("Get Pitch", Robot.chassis.getPitch());
-    	SmartDashboard.putNumber("Get Roll", Robot.chassis.getRoll());
+    		//SmartDashboard.putNumber("Get Angle", Robot.chassis.getAngle());
+    		//SmartDashboard.putNumber("Get Pitch", Robot.chassis.getPitch());
+    		//SmartDashboard.putNumber("Get Roll", Robot.chassis.getRoll());
     	
     	//SmartDashboard.putBoolean("Robot Level", Robot.chassis.robotLevel());
     	
     	//VISION
-    	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
-    	SmartDashboard.putNumber("Jetson X Act",Robot.table.getDouble("X"));
-    	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
+    		//SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
+    		//SmartDashboard.putNumber("Jetson X Act",Robot.table.getDouble("X"));
+    		//SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
     	
     	//DRIVER INDICATORS
-    	SmartDashboard.putBoolean("At Angle", Robot.chassis.isOnRamp());
+    		//SmartDashboard.putBoolean("At Angle", Robot.chassis.isOnRamp());
     	
     	//PROGRAM TESTS
-    	SmartDashboard.putNumber("Vision Angle",Robot.chassis.getGyroVisionTarget());// Robot.chassis.testAngle);
-    	SmartDashboard.putNumber("Gyro Angle", Robot.chassis.getAngle());
-    	SmartDashboard.putNumber("Counts", Robot.chassis.counts);
+    		//SmartDashboard.putNumber("Vision Angle",Robot.chassis.getGyroVisionTarget());// Robot.chassis.testAngle);
+    		//SmartDashboard.putNumber("Gyro Angle", Robot.chassis.getAngle());
+    		//SmartDashboard.putNumber("Counts", Robot.chassis.counts);
     	//SmartDashboard.putBoolean("On Defense", Robot.chassis.isOverDefense());
     	//SmartDashboard.putBoolean("On Defense", Robot.chassis.isOverDefense());
     	//SmartDashboard.putBoolean("On Defense", Robot.chassis.onDefense);
